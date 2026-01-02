@@ -1,0 +1,46 @@
+<div class="modal" id="modalLogin">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-target="#modalLogin" data-toggle="modal" aria-hidden="true">×</button>
+        <h3 class="modal-title text-primary">Log In</h3>
+      </div>
+      <div class="modal-body">
+        <p ng-if="isNewUser">✔️ Welcome! You have signed up successfully. Please check your e-mail inbox for account activation before you are ready to go ahead and log in.</p>
+        <form name="loginForm">
+          <div class="form-group">
+            <label for="loginInputEmail" class="col-md-2 control-label">Email</label>
+            <div class="col-md-10">
+              <input type="email" name="email" class="form-control" id="loginInputEmail" placeholder="Email"
+                ng-model="data.email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="loginInputPassword" class="col-md-2 control-label">Password</label>
+            <div class="col-md-10">
+              <input type="password" name="password" class="form-control" id="loginInputPassword" placeholder="Password"
+                ng-model="data.password" my-enter="login()">
+            </div>
+          </div>
+        </form>
+        <br><br>
+        <div class="row" ng-if="loginProviders.length">
+          <div class="col-md-4">
+            <h4 class="text-primary">Or login with ...</h4>
+          </div>
+          <div class="col-md-4">
+            <a ng-if="loginProviders.includes('facebook')" href="{{getApiUrl()}}auth/facebook"><img src="images/facebook.png" width="52px"></a>
+            <a ng-if="loginProviders.includes('google')" href="{{getApiUrl()}}auth/google"><img src="images/google.png" width="52px"></a>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-target="#modalLogin" data-toggle="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="login()"
+          ng-disabled="!loginForm.email.$valid || !loginForm.password.$valid || stringEmpty(data.email) || stringEmpty(data.password) || data.loading">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

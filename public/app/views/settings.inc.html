@@ -1,0 +1,45 @@
+<div class="modal" id="modalSettings">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-target="#modalSettings" data-toggle="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title text-primary">Settings</h3>
+            </div>
+            <div class="modal-body">
+                <section id="changePasswordSection" ng-if="data.authStrategy == 'local'" style="margin-top: -20px; overflow: auto;">
+                    <h4 class="text-primary">Change Password</h4>
+                    <form role="form" name="changePasswordForm" ng-submit="updatePassword()" novalidate>
+                        <div class="form-group">
+                            <label for="loginInputOld" class="col-md-2 control-label">Old</label>
+                            <div class="col-md-10">
+                                <input type="password" name="oldPassword" class="form-control" id="settingsOldPassword"
+                                    placeholder="Old password" ng-model="data.oldPassword" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginInputNew" class="col-md-2 control-label">New</label>
+                            <div class="col-md-10">
+                                <input type="password" name="newPassword" class="form-control" id="settingsNewPassword"
+                                    placeholder="New password" ng-model="data.newPassword" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary pull-right" ng-disabled="changePasswordForm.$invalid" style="margin-right: 15px;">Save</button>
+                        </div>
+                    </form>
+                </section>
+                <section id="telegramBotSection" style="overflow: auto;">
+                    <h4 class="text-primary">Telegram Bot Integration</h4>
+                    <p>Anchr integrates with Telegram through the official <a href="https://t.me/AnchrBot" target="_blank">@AnchrBot</a>. It allows you to add and shorten links and upload images right from your favorite messaging app. To get started, create a code below and send a message with <code>/start 123456</code> (for example) to the bot.</p>
+                    <button type="button" class="btn btn-primary" ng-click="getOtp()">Generate Code</button>
+                </section>
+                <section id="deleteAccountSection" style="overflow: auto;">
+                    <h4 class="text-primary">Delete Account</h4>
+                    <p>You can delete your account and all related data stored in Anchr. But be careful as his action is irreversible. If you hit the big, red button below, there is no turning back.</p>
+                    <button ng-if="!data.deleting" ng-click="data.deleting = true" class="btn btn-raised btn-danger"><i class="glyphicon glyphicon-trash"></i> &nbsp;Delete Account</button>
+                    <button ng-if="data.deleting" ng-click="deleteAccount()" class="btn btn-raised btn-danger"><i class="glyphicon glyphicon-trash"></i> &nbsp;Are you sure?</button>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

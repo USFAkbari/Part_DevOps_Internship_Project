@@ -1,0 +1,197 @@
+definitions:
+  Image:
+    type: object
+    description: Meta data about an image
+    properties:
+      _id:
+        type: string
+        description: The image's ID
+      created:
+        type: string
+        format: 'date-time'
+        description: Created date of this image object
+      encrypted:
+        type: boolean
+        description: Whether or not this image is encrypted
+      type:
+        type: string
+        description: Mime-type of the image, e.g. 'image/png'
+      href:
+        type: string
+        format: url
+        description: URL of the actual image
+    required:
+      - encrypted
+      - href
+
+  User:
+    type: object
+    description: A registered user
+    properties:
+      _id:
+        type: string
+        description: The user's ID
+      created:
+        type: string
+        format: 'date-time'
+        description: Created date of this user object
+      local:
+        type: object
+        description: User authentication information if signed up using e-mail address and password
+        properties:
+          email:
+            type: string
+            description: The user's e-mail address
+      facebook:
+        type: object
+        description: User authentication information if signed up using Facebook
+        properties:
+          id:
+            type: string
+            description: The user's Facebook ID
+          email:
+            type: string
+            description: The user's e-mail address
+          name:
+            type: string
+            description: The user's name
+      google:
+        type: object
+        description: User authentication information if signed up using Google
+        properties:
+          id:
+            type: string
+            description: The user's Google ID
+          email:
+            type: string
+            description: The user's e-mail address
+          name:
+            type: string
+            description: The user's name
+
+  UserSignup:
+    type: object
+    description: User signup / login object
+    properties:
+      email:
+        type: string
+        description: The user's e-mail address to sign up with
+        format: email
+      password:
+        type: string
+        description: The user's plain text password to sign up with
+    required:
+      - email
+      - password
+
+  PasswordUpdate:
+    type: object
+    description: Password update object
+    properties:
+      old:
+        type: string
+        description: The user's old password for verification
+      new:
+        type: string
+        description: The user's new password
+    required:
+      - old
+      - new
+
+  Link:
+    type: object
+    description: A bookmarked link as part of a collection
+    properties:
+      _id:
+        type: string
+        description: The link's unique ID
+      url:
+        type: string
+        format: url
+        description: The link's target address
+      description:
+        type: string
+        description: The link's user-given description
+      date:
+        type: string
+        format: data-time
+        description: Date at which the link was collected
+    required:
+      - url
+      - description
+
+  LinkList:
+    type: array
+    description: A list of links as part of a collection
+    items:
+      $ref: '#/definitions/Link'
+
+  Collection:
+    type: object
+    description: A collection of links
+    properties:
+      _id:
+        type: string
+        description: The collection's unique ID
+      name:
+        type: string
+        description: The collection's user-given name
+    required:
+      - name
+
+  CollectionDetails:
+    type: object
+    description: A collection of links including details
+    properties:
+      _id:
+        type: string
+        description: The collection's unique ID
+      name:
+        type: string
+        description: The collection's user-given name
+      owner:
+        type: string
+        description: ID of the collection's owner
+      shared:
+        type: boolean
+        description: Whether or not this collection is shared by a public link
+      modified:
+        type: string
+        format: date-time
+        description: Date when the collection was last updated
+      links:
+        $ref: '#/definitions/LinkList'
+
+  CollectionList:
+    type: array
+    items:
+      $ref: '#/definitions/Collection'
+
+  Shortlink:
+    type: object
+    description: Meta data about a shortlink#
+    properties:
+      _id:
+        type: string
+        description: The shortlink's ID
+      url:
+        type: string
+        format: url
+        description: The shortlink's target URL
+      created:
+        type: string
+        format: date-time
+        description: The shortlink's creation date
+    required:
+      - url
+
+  ShortlinkShort:
+    type: object
+    description: Meta data about a shortlink
+    properties:
+      url:
+        type: string
+        format: url
+        description: The shortlink's target URL
+    required:
+      - url

@@ -1,0 +1,126 @@
+parameters:
+  page:
+    in: query
+    name: page
+    type: integer
+    require: false
+    description: Page number to fetch
+
+  pageSize:
+    in: query
+    name: pageSize
+    type: integer
+    require: false
+    description: Number of items per page
+
+  q:
+    in: query
+    name: q
+    type: string
+    require: false
+    description: Query string to filter by
+
+  userSignup:
+    in: body
+    name: user
+    description: The user to create
+    schema:
+      $ref: '#/definitions/UserSignup'
+    required: true
+
+  userLogin:
+    in: body
+    name: user
+    description: The user to log in
+    schema:
+      $ref: '#/definitions/UserSignup'
+    required: true
+
+  passwordUpdate:
+    in: body
+    name: passwordUpdate
+    description: Combination of old and new password
+    schema:
+      $ref: '#/definitions/PasswordUpdate'
+    required: true
+
+  imageId:
+    in: path
+    name: id
+    type: string
+    required: true
+    description: ID of the image to get
+
+  imageFile:
+    in: formData
+    name: uploadFile
+    type: file
+    required: true
+    description: The image file to upload
+
+  imageEncrypted:
+    in: formData
+    name: encrypted
+    type: boolean
+    required: false
+    description: Whether or not the currently uploading image is encrypted
+
+  collectionId:
+    in: path
+    name: id
+    type: string
+    required: true
+    description: ID of the collection to get
+
+  collection:
+    in: body
+    name: collection
+    description: The collection to create
+    schema:
+      $ref: '#/definitions/Collection'
+    required: true
+
+  collectionDetails:
+    in: body
+    name: collection
+    description: The collection to update
+    schema:
+      $ref: '#/definitions/CollectionDetails'
+    required: true
+
+  link:
+    in: body
+    name: link
+    description: The new link to add
+    schema:
+      $ref: '#/definitions/Link'
+    required: true
+
+  linkId:
+    in: path
+    name: linkId
+    type: string
+    required: true
+    description: ID of the link to get
+
+  remoteUrl:
+    in: query
+    name: url
+    type: string
+    required: true
+    description: URL of the website to parse
+
+  shortlinkId:
+    in: path
+    name: id
+    type: string
+    required: true
+    description: ID of the shortlink to resolve
+
+  shortlink:
+    in: body
+    name: shortlink
+    description: The new shortlink to create
+    schema:
+      $ref: '#/definitions/Shortlink'
+    required: true
