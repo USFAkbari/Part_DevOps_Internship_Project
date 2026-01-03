@@ -1,7 +1,6 @@
 services:
 
   anchr:
-    image: anchr:latest
     build: ./
     container_name: anchr
     ports:
