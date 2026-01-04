@@ -39,6 +39,8 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
+      - '--web.external-url=http://0.0.0.0/prometheus'
+      - '--web.route-prefix=/'
     depends_on:
       - anchr
 
@@ -49,6 +51,10 @@ services:
       - "4000:3000"
     volumes:
       - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SERVER_DOMAIN=localhost
+      - GF_SERVER_ROOT_URL=/grafana
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true
     restart: unless-stopped
     depends_on:
       - anchr
