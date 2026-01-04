@@ -11,6 +11,7 @@ module.exports = function () {
                 {
                     'script-src': ['\'self\'', '\'unsafe-inline\''],
                     'img-src': ['\'self\'', 'data:', 'blob:'],
+                    'upgrade-insecure-requests': null, // Disable HTTPS upgrade for local HTTP access
                 }
             )
         }
